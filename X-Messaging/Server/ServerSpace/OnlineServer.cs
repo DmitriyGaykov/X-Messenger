@@ -11,7 +11,7 @@ public partial class Server
     private readonly IDictionary<int, EndPoint> onlineUsers = new Dictionary<int, EndPoint>();
     private readonly IDictionary<int, DateTime> clearAfter = new Dictionary<int, DateTime>();
 
-    private const int WAITTIME = 120;
+    private const int WAITTIME = 240;
 
     private async void AddOnlineUserAsync(int userId, EndPoint user)
     {
@@ -26,8 +26,7 @@ public partial class Server
             }
         });
     }
-
-    public async void StartOnlineCleaner()
+    public async void StartOnlineCleanerAsync()
     {
         logger.IInfo("Онлайн контроллер запущен!");
         await Task.Run(() =>
@@ -52,4 +51,5 @@ public partial class Server
         });
         logger.IInfo("Онлайн контроллер прекратил работу!");
     }
+    public bool IsInNetwork(int id) => onlineUsers.ContainsKey(id);
 }

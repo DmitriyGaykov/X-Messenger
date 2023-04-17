@@ -1,5 +1,6 @@
 ﻿global using System.Collections.Concurrent;
 using Lib.Converters;
+using Lib.MessageNamespace.CallMessages;
 using Lib.MessageNamespace.ViewMessages;
 using System.Text;
 
@@ -41,19 +42,27 @@ public partial class Server
         logger.Info($"Контроллер сообщений начал работать с сообщением(ID: {msg.Id}, Type: ${ msg.MessageType })");
         EndPoint? to;
 
-        if (msg.MessageType is not Message.TypeOfMessage.OnlineMessage or Message.TypeOfMessage.AnswerMessage)
+        if (msg.NeedResnd)
         {
             switch(msg.MessageType)
             {
                 case Message.TypeOfMessage.ViewMessage:
-                    onlineUsers.TryGetValue(msg.IDUserTo, out to);
+                    {
+                        onlineUsers.TryGetValue(msg.IDUserTo, out to);
 
-                    ToDBAsync((ViewMessage)msg);
+                        ToDBAsync((ViewMessage)msg); /////////////////////////////
 
-                    if (to is not null)
-                        SendAsync(msg, to);
-                    else
-                        logger.MicroInfo($"Сообщение не отправленно. Человека с ID { msg.IDUserTo } нет в сети");
+                        if (to is not null)
+                            SendAsync(msg, to);
+                        else
+                            logger.MicroInfo($"Сообщение не отправленно. Человека с ID {msg.IDUserTo} нет в сети");
+                    }
+                    break;
+
+                case Message.TypeOfMessage.CallMessage:
+                    {
+                        WorkWithCallMessageAsync((CallMessage)msg);
+                    }
                     break;
             }
         }

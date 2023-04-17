@@ -18,12 +18,13 @@ public class Program
 
         try
         {
-            server = new("127.0.0.1", 8282);
+            server = new("192.168.0.108", 8282);
 
             server.Start();
             server.StartReceiveAsync();
-            server.StartOnlineCleaner();
+            server.StartOnlineCleanerAsync();
             server.MessageControllerStartAsync();
+            server.StartCallServerAsync();
         }
         catch(Exception e)
         {

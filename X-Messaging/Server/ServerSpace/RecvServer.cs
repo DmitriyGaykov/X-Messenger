@@ -1,5 +1,6 @@
 ﻿using Lib.Converters;
 using Lib.MessageNamespace;
+using Lib.MessageNamespace.CallMessages;
 using Lib.MessageNamespace.ViewMessages;
 using System;
 using System.Collections.Concurrent;
@@ -13,7 +14,7 @@ namespace Server.ServerSpace;
 
 public partial class Server
 {
-    private const int MAXBYTESIZE = 4092;
+    private const int MAXBYTESIZE = 32768;
 
     public async void StartReceiveAsync()
     {
@@ -66,6 +67,8 @@ public partial class Server
 
         msg = MyJsonConverter.FromJson<Message>(json);
 
+        if (msg is null) return;
+
         SendResponceAsync(msg, clnt, msg is not null);
 
         if (msg is not null)
@@ -84,7 +87,7 @@ public partial class Server
 
     private async void SendResponceAsync(Message msg, EndPoint endPoint, bool success)
     {
-        if (msg is not null && msg.MessageType is (Message.TypeOfMessage.AnswerMessage or Message.TypeOfMessage.OnlineMessage)) return;
+        if (msg is not null && !msg.NeedResnd) return;
 
         await Task.Run(() =>
         {
@@ -107,6 +110,8 @@ public partial class Server
 
     private static Message DefineMessage(Message msg, string json)
     {
+        if (msg is null) return null;
+
         Message? answer = null;
 
         switch(msg.MessageType)
@@ -131,6 +136,21 @@ public partial class Server
                 break;
             case Message.TypeOfMessage.OnlineMessage:
                 answer = MyJsonConverter.FromJson<OnlineMessage>(json);
+                break;
+            case Message.TypeOfMessage.CallMessage:
+                {
+                    var temp = MyJsonConverter.FromJson<CallMessage>(json);
+                    
+                    switch (temp.MessageCallMessageType)
+                    {
+                        case CallMessage.TypeOfCallMessage.StartCall:
+                            answer = MyJsonConverter.FromJson<StartCallMessage>(json);
+                            break;
+                        case CallMessage.TypeOfCallMessage.ByteCallMessage:
+                            answer = MyJsonConverter.FromJson<ByteCallMessage>(json);
+                            break;
+                    }
+                }
                 break;
         }
 

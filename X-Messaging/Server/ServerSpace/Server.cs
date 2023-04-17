@@ -17,35 +17,37 @@ public partial class Server
 
     private bool isExit = false;
 
-    private Socket socket;
+    private readonly Socket socket = new(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
     public Server(string ip, int port)
     {
         this.ip = ip;
         this.port = port;
+        this.cport = port + 1;
 
         endPoint = new IPEndPoint(IPAddress.Parse(this.ip), this.port);
+        cEndPoint = new IPEndPoint(IPAddress.Parse(this.ip), this.cport);
 
         logger.IInfo("Создан экземляр класса Server");
     }
 
     public void Start()
     {
-        socket = new(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         socket.Bind(endPoint);
+        callSocket.Bind(cEndPoint);
 
         logger.IInfo(
             $"""
             =========================================================
                                                                       
                  Сервер связан с параметрами:                         
-                 • Протокол: UDP                                         
-                 • Тип сокета: Datagram                                  
+                 • Протокол:    UDP                                         
+                 • Тип сокета:  Datagram                                  
                                                                       
             =========================================================
                                                                                                                   
-                 • IP: {ip}                                            
-                 • PORT: {port}                                        
+                 • IP:          {ip}                                            
+                 • PORT:        {port}                                        
                  • InnetFamily: {endPoint.AddressFamily.ToString()}    
                                                                        
             =========================================================
