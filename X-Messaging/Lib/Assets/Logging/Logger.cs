@@ -67,10 +67,11 @@ public class Logger
 
             string info =
             $"""
+				
 				[MICROINFO] {now.ToLongTimeString()}	||			{msg}
 			""";
 
-            WriteLine(info);
+            Write(info);
         });
 	}
 
@@ -90,7 +91,7 @@ public class Logger
 
 			""";
 
-            WriteLine(info);
+            Write(info);
         });
 	}
 	public async void Info(string msg)
@@ -109,9 +110,24 @@ public class Logger
 
 			""";
 
-            WriteLine(info);
+            Write(info);
         });
 	}
+
+	public async void MicroWarning(string msg)
+	{
+        await Task.Run(() =>
+        {
+            var now = DateTime.Now;
+
+            string warn =
+            $"""
+				[MICROWARNING] {now.ToLongTimeString()} | {msg}
+			""";
+
+            WriteLine(warn);
+        });
+    }
 
 	public async void Warning(string msg)
 	{
@@ -130,7 +146,7 @@ public class Logger
 
 			""";
 
-            WriteLine(warn);
+            Write(warn);
         });
 	}
 
@@ -159,8 +175,6 @@ public class Logger
 
     public void Write(string msg)
 	{
-		msg = line + msg + line;
-
         if (toConsole)
 		{
 			Console.Write(msg);

@@ -1,0 +1,38 @@
+﻿<TextBox
+    x:Class="X_Messenger.View.Tags.TextBoxes.FormInput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:X_Messenger.View.Tags.TextBoxes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <TextBox.Resources>
+        <ResourceDictionary Source="../../Styles/FormsStyles/FormStyle.xaml" />
+    </TextBox.Resources>
+
+    <TextBox.Style>
+        <Style TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border Focusable="False" Style="{StaticResource FormInput_Border}">
+                                <DockPanel>
+                                    <Image Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}" Style="{StaticResource FormInput_Image}" />
+                                    <TextBox
+                                        Focusable="True"
+                                        Style="{StaticResource FormInput_TextBox}" 
+                                        Text="{ Binding InputText, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}} }"/>
+                                </DockPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+    </TextBox.Style>
+
+</TextBox>

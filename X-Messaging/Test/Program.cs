@@ -1,130 +1,49 @@
-﻿using Newtonsoft.Json;
+﻿using Lib.Converters;
 using Lib.MessageNamespace;
+using Lib.MessageNamespace.ViewMessages;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using NAudio.Wave;
-using Lib.MessageNamespace.ViewMessages;
 
-namespace Server;
+namespace Test;
 
-internal class Program
+class Program
 {
-    private static bool start = false;
-    static void Print(int i, Socket socket, EndPoint endPoint)
+    static public void Main(string[] args)
     {
-        Message text = new TextMessage("Hello world " + i.ToString());
-        Console.WriteLine("Enter: ");
-        string s = Console.ReadLine();
-        Console.WriteLine(s);
-        int id = int.Parse(s);
-        text.IDUserFrom = id;
-        text.IDUserTo = 0;
+        Socket socket = new(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-        byte[] buffer = new byte[4096];
+        IPAddress ip = IPAddress.Parse("127.0.0.1");
+        int PORT = 8282;
+        EndPoint serv = new IPEndPoint(ip, PORT);
 
-        while (!start) ;
-        socket.SendToAsync(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(text)), endPoint);
-        
-        int size = socket.ReceiveFrom(buffer, ref endPoint);
+        int idMy = int.Parse(Console.ReadLine());
+        int idTo = int.Parse(Console.ReadLine());
 
-        string message = Encoding.UTF8.GetString(buffer, 0, size);
+        string text = Console.ReadLine() ?? "msg";
 
-        Console.WriteLine(message);
+        Message msg = new TextMessage(text);
 
-        Console.WriteLine("........................");
-    }
+        msg.IDUserFrom = idMy;
+        msg.IDUserTo = idTo;
 
-    static async void PrintAsync(int i, Socket socket, EndPoint endPoint)
-    {
-        await Task.Run(() => Print(i, socket, endPoint));
-    }
-    static void Main(string[] args)
-    {
-        #region Audio
+        var bytes = new byte [30_000];
+        var fbytes = MyJsonConverter.ToBytes(msg);
+        int i = 0;
 
-        //int sampleRate = 54100; // частота дискретизации
-        //int channels = 2; // количество каналов (1 - моно, 2 - стерео)
-        //int bitDepth = 16; // битность звука
-
-
-        //var waveIn = new WaveInEvent
-        //{
-        //    WaveFormat = new WaveFormat(sampleRate, bitDepth, channels)
-        //};
-        //List<byte> buffer = new();
-        //// Обработчик получения звуковых данных
-        //waveIn.DataAvailable += (sender, e) =>
-        //{
-        //    // Здесь можно обрабатывать полученные звуковые данные
-        //    // Например, сохранять их в файл или передавать на удаленный сервер
-
-        //    buffer.AddRange(e.Buffer);
-        //};
-
-        //// Начинаем запись звука
-        //waveIn.StartRecording();
-
-        //// Ожидание завершения записи (в данном случае - бесконечное)
-        //Console.WriteLine("Запись началась. Нажмите Enter, чтобы остановить...");
-        //Console.ReadLine();
-
-        //// Останавливаем запись звука
-        //waveIn.StopRecording();
-
-        //var waveOut = new WaveOutEvent();
-        //var bufferStream = new MemoryStream(buffer.ToArray());
-        //var audioFileReader = new RawSourceWaveStream(bufferStream, waveIn.WaveFormat);
-        //waveOut.Init(audioFileReader);
-        //waveOut.Play();
-
-        //Console.Read();
-
-        #endregion
-
-        #region Socket
-        try
+        foreach(var b  in fbytes)
         {
-            string IP = "127.0.0.1";
-            int port = 8282;
-            var ip = IPAddress.Parse(IP);
-
-            EndPoint endPoint = new IPEndPoint(ip, port);
-
-            Socket socket = new(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
-            Message text = new TextMessage("Hello world " + 1);
-            Console.WriteLine("Enter: ");
-            string s = Console.ReadLine();
-            int id = int.Parse(s);
-            text.IDUserFrom = id;
-            text.IDUserTo = int.Parse(Console.ReadLine());
-
-            byte[] buffer = new byte[4096];
-
-            socket.SendTo(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(text)), endPoint);
-            while (true)
-            {
-                int size = socket.ReceiveFrom(buffer, ref endPoint);
-
-                string message = Encoding.UTF8.GetString(buffer, 0, size);
-
-                Console.WriteLine(message);
-            }
-
-            Console.WriteLine("........................");
-            start = true;
-
-            Console.Read();
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
-            socket.Dispose();
-        } 
-        catch(Exception e)
-        {
-            Console.WriteLine("Ошибка\n" + e);
-            Thread.Sleep(20000);
+            bytes[i++] = b;
         }
-        #endregion
+
+        socket.SendToAsync(bytes, serv);
+        int size;
+
+        while(true)
+        {
+            size = socket.ReceiveFrom(bytes, ref serv);
+            text = Encoding.UTF8.GetString(bytes, 0, size);
+            Console.WriteLine(text);
+        }
     }
 }

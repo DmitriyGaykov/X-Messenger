@@ -1,5 +1,6 @@
 ﻿using Lib.Converters;
 using Lib.MessageNamespace.CallMessages;
+using System.Net;
 using System.Text;
 
 namespace Server.ServerSpace;
@@ -11,10 +12,24 @@ public partial class Server
     private readonly int cport;
     private readonly EndPoint cEndPoint;
 
+    private readonly ConcurrentBag<int> waitingUsers = new();
+
     private async void WorkWithCallMessageAsync(CallMessage message) => await Task.Run(() => WorkWithCallMessage(message));
     private void WorkWithCallMessage(CallMessage message)
     {
-        
+        if(message is StartCallMessage scmsg)
+        {
+            if(!IsInNetwork(scmsg.IDUserTo))
+            {
+                var agreeMsg = new AgreeMessage(scmsg);
+                agreeMsg.Agree = false;
+
+                SendToAsync(socket, agreeMsg, onlineUsers[scmsg.IDUserFrom]);
+                return;
+            }
+
+            SendToAsync(socket, scmsg, onlineUsers[scmsg.IDUserTo]);
+        }
     }
 
     /// <summary>
@@ -33,11 +48,12 @@ public partial class Server
             );
 
         await Task.Run(() => StartCallServer());
+
+        logger.IInfo("Сервер звонков прекратил работу");
     }
 
     private void StartCallServer()
     {
-
         byte[] buffer = new byte[MAXBYTESIZE];
         EndPoint clnt;
         int size;
@@ -51,7 +67,6 @@ public partial class Server
         }
 
         callSocket.Close();
-        logger.IInfo("Сервер звонков прекратил работу");
     }
 
     public async void SendCallAnswerAsync(byte[] buffer, EndPoint clnt, int size)
@@ -101,7 +116,6 @@ public partial class Server
             }
             else
             {
-                Console.WriteLine(msg.IDUserTo);
                 SendToAsync(callSocket, msg, onlineUsers[bcmsg.IDUserTo]);
             }
         });

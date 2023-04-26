@@ -149,6 +149,9 @@ public partial class Server
                         case CallMessage.TypeOfCallMessage.ByteCallMessage:
                             answer = MyJsonConverter.FromJson<ByteCallMessage>(json);
                             break;
+                        case CallMessage.TypeOfCallMessage.EndCallMessage:
+                            answer = MyJsonConverter.FromJson<EndCallMessage>(json);
+                            break;
                     }
                 }
                 break;

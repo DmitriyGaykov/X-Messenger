@@ -20,6 +20,24 @@ public static class MyJsonConverter
 
     public static T? FromJson<T>(string json) where T : class
     {
-        return JsonConvert.DeserializeObject<T>(json) as T;
+        try
+        {
+            T? answer = JsonConvert.DeserializeObject<T>(json) as T;
+            return answer;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public static byte[] ToBytes(object? obj)
+    {
+        if (obj is null) return null;
+
+        string json = ToJson(obj);
+        var bytes = Encoding.UTF8.GetBytes(json);
+
+        return bytes;
     }
 }

@@ -5,6 +5,6 @@ public class OnlineMessage : Message
 {
     public OnlineMessage() : base(TypeOfMessage.OnlineMessage)
     {
-
+        NeedResnd = false;
     }
 }

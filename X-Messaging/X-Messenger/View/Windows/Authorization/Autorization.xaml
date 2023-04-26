@@ -1,0 +1,70 @@
+﻿<Window
+    x:Class="X_Messenger.View.Windows.Authorization.Autorization"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="clr-namespace:X_Messenger.View.Tags.Buttons"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:X_Messenger.View.Windows.Registrations"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="clr-namespace:X_Messenger.View.Tags.TextBoxes"
+    Title="Авторизация"
+    SizeToContent="WidthAndHeight"
+    Style="{DynamicResource RegWindow}"
+    WindowStartupLocation="CenterScreen">
+
+    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/RegStyles/RegStyle.xaml" />
+                <ResourceDictionary Source="../../Styles/FormsStyles/FormStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Border Margin="50" Style="{StaticResource BorderForForm}">
+            <StackPanel>
+                <TextBlock
+                    Margin="0,0,0,57"
+                    Style="{DynamicResource FormTitle}"
+                    Text="Authorization" />
+
+
+                <StackPanel x:Name="formInputs" Margin="0,0,0,57">
+
+                    <tb:FormInput
+                        Margin="0,0,0,35"
+                        ImageSource="/View/Windows/Registrations/Login.png"
+                        InputName="NameInput"
+                        InputText="Login" />
+
+                    <tb:FormInput
+                        Margin="0,0,0,35"
+                        ImageSource="/View/Windows/Registrations/Password.png"
+                        InputName="PasswordInput"
+                        InputText="Password" />
+
+                </StackPanel>
+
+                <StackPanel>
+                    <b:RadiusButton
+                        Margin="0,0,0,8"
+                        HorizontalAlignment="Center"
+                        Content="Sign in"
+                        Radius="20"
+                        From="#FFDD2981"
+                        To="#FFE600FA" />
+
+                    <Button
+                        Name="LinkTo"
+                        Content="Зарегистрийтесь!"
+                        Style="{StaticResource LinkButtonStyle}" />
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+
+</Window>

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>X_Messenger</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="View\Windows\MainPage\Angela.png" />
+    <None Remove="View\Windows\MainPage\CallPurple.png" />
+    <None Remove="View\Windows\MainPage\Cross.png" />
+    <None Remove="View\Windows\MainPage\Logo.png" />
+    <None Remove="View\Windows\MainPage\Pause.png" />
+    <None Remove="View\Windows\MainPage\Settings.png" />
+    <None Remove="View\Windows\MainPage\Smile.png" />
+    <None Remove="View\Windows\MainPage\StartVoiceMessage.png" />
+    <None Remove="View\Windows\Registrations\Login.png" />
+    <None Remove="View\Windows\Registrations\Nickname.png" />
+    <None Remove="View\Windows\Registrations\Password.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Windows\MainPage\Angela.png" />
+    <Resource Include="View\Windows\MainPage\CallPurple.png" />
+    <Resource Include="View\Windows\MainPage\Cross.png" />
+    <Resource Include="View\Windows\MainPage\Logo.png" />
+    <Resource Include="View\Windows\MainPage\Pause.png" />
+    <Resource Include="View\Windows\MainPage\Settings.png" />
+    <Resource Include="View\Windows\MainPage\Smile.png" />
+    <Resource Include="View\Windows\MainPage\StartVoiceMessage.png" />
+    <Resource Include="View\Windows\Registrations\Login.png" />
+    <Resource Include="View\Windows\Registrations\Nickname.png" />
+    <Resource Include="View\Windows\Registrations\Password.png" />
+  </ItemGroup>
+
+</Project>

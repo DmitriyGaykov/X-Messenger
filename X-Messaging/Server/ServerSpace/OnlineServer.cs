@@ -11,7 +11,7 @@ public partial class Server
     private readonly IDictionary<int, EndPoint> onlineUsers = new Dictionary<int, EndPoint>();
     private readonly IDictionary<int, DateTime> clearAfter = new Dictionary<int, DateTime>();
 
-    private const int WAITTIME = 240;
+    private const int WAITTIME = 120; // seconds
 
     private async void AddOnlineUserAsync(int userId, EndPoint user)
     {

@@ -15,6 +15,7 @@ public class Message
     public TypeOfMessage MessageType { get; set; }
     public int IDUserFrom { get; set; }
     public int IDUserTo { get; set; }
+    public bool NeedResnd { get; set; }
 
     #endregion
 
@@ -23,6 +24,7 @@ public class Message
     public Message(TypeOfMessage type)
     {
         MessageType = type;
+        NeedResnd = true;
     }
 
     public Message(Message msg)
@@ -33,12 +35,13 @@ public class Message
             MessageType = msg.MessageType;
             IDUserFrom = msg.IDUserFrom;
             IDUserTo = msg.IDUserTo;
+            NeedResnd = msg.NeedResnd;
         }
     }
 
     public Message()
     {
-
+        NeedResnd = false;
     }
 
     #endregion
@@ -55,7 +58,8 @@ public class Message
     {
         ViewMessage, // Текстовое сообщение | Голосовое сообщение
         AnswerMessage, // Ответ от сервера на успешный или неуспешный прием сообщения
-        OnlineMessage // Сообщение от клиента посылается каждые 20 секунд на сервер, чтобы указать, что он в сети
+        OnlineMessage, // Сообщение от клиента посылается каждые 20 секунд на сервер, чтобы указать, что он в сети
+        CallMessage // Сообщение, работающей со звонками
     }
 
     #endregion

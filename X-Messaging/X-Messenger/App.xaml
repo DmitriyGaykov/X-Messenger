@@ -1,0 +1,9 @@
+﻿<Application x:Class="X_Messenger.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:X_Messenger"
+             StartupUri="View/Windows/MainPage/MainPageView.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

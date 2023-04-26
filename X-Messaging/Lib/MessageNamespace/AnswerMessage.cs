@@ -12,11 +12,13 @@ public class AnswerMessage : Message
 
     public AnswerMessage() : base(TypeOfMessage.AnswerMessage)
     {
+        NeedResnd = false;
     }
 
     public AnswerMessage(Message msg) : base(msg)
     {
         this.MessageType = TypeOfMessage.AnswerMessage;
+        NeedResnd = false;
     }
 
     public AnswerMessage(Status messageStatus) : this()
