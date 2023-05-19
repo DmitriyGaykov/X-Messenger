@@ -1,0 +1,119 @@
+﻿<Page
+    x:Class="X_Messenger.View.Windows.MainPage.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:butt="clr-namespace:X_Messenger.View.Tags.Buttons"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:X_Messenger.View.Windows.MainPage.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="SettingsPage"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/View/Styles/MainPage/MainPageStyle.xaml" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            Style="{DynamicResource HeaderBorderStyle}">
+            <Grid VerticalAlignment="Center">
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource ApplicationName}"
+                    Text="X-Messenger" />
+                <Button Command="{Binding OnSettingsCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Cursor="Hand"
+                                Source="/View/Windows/MainPage/Cross.png"
+                                Style="{StaticResource CrossStyle}" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Padding="18,10,18,5"
+            Style="{DynamicResource HeaderBorderStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,10" VerticalAlignment="Top">
+                            <TextBlock
+                                Width="80"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource SettingsText}"
+                                Text="Тема:" />
+                            <ComboBox
+                                ItemsSource="{Binding Themes}"
+                                SelectedItem="{Binding SelectedTheme}"
+                                Style="{StaticResource ComboBoxStyle}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding DataContext.OnThemeCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}" CommandParameter="{Binding}">
+                                            <Button.Template>
+                                                <ControlTemplate>
+                                                    <TextBlock Style="{DynamicResource SettingsCBIText}" Text="{Binding}" />
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                        </DockPanel>
+                        <butt:RadiusButton
+                            Margin="0,0,0,10"
+                            Command="{Binding OnEditCommand, Mode=OneTime}"
+                            Content="Редактировать профиль"
+                            FontSize="14"
+                            Radius="7"
+                            From="{DynamicResource ColorSecond}"
+                            To="{DynamicResource ColorSecond}" />
+                        <butt:RadiusButton
+                            Margin="0,0,0,10"
+                            Command="{Binding OnAdminPanelCommand, Mode=OneTime}"
+                            Content="Админ панель"
+                            FontSize="14"
+                            Radius="7"
+                            Visibility="{Binding ShowAdminPanel}"
+                            From="{DynamicResource ColorThirdMain}"
+                            To="{DynamicResource ColorThirdMain}" />
+                    </StackPanel>
+                </Border>
+                <butt:RadiusButton
+                    Grid.Row="1"
+                    Padding="Auto, 4"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding OnExitCommand}"
+                    Content="Выйти"
+                    FontSize="17"
+                    Radius="7"
+                    From="{DynamicResource ColorThirdMain}"
+                    To="{DynamicResource ColorThirdMain}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

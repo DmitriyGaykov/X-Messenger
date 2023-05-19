@@ -21,11 +21,19 @@
                         <ControlTemplate>
                             <Border Focusable="False" Style="{StaticResource FormInput_Border}">
                                 <DockPanel>
-                                    <Image Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}" Style="{StaticResource FormInput_Image}" />
+                                    <Image
+                                        Width="{Binding Size, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}"
+                                        Height="{Binding Size, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}"
+                                        Cursor="Hand"
+                                        Source="{Binding ImageSource, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}"
+                                        Style="{StaticResource FormInput_Image}" />
                                     <TextBox
+                                        VerticalAlignment="Bottom"
                                         Focusable="True"
-                                        Style="{StaticResource FormInput_TextBox}" 
-                                        Text="{ Binding InputText, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}} }"/>
+                                        FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}"
+                                        Style="{StaticResource FormInput_TextBox}"
+                                        TabIndex="{Binding TabIndex, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}"
+                                        Text="{Binding InputText, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type local:FormInput}}}" />
                                 </DockPanel>
                             </Border>
                         </ControlTemplate>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using X_Messenger.View.Tags.TextBoxes;
 using X_Messenger.ViewModel.Windows.Registrations;
 
 namespace X_Messenger.View.Windows.Registrations;
@@ -27,7 +28,6 @@ public partial class RegistrationView : Window
         InitializeComponent();
 
         this.DataContext = registration;
-        LinkTo.Click += registration.ClickOnLinkEvent;
     }
 
 }

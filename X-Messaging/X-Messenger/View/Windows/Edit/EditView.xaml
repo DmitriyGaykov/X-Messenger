@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="clr-namespace:X_Messenger.View.Tags.TextBoxes"
     Title="Редактировать профиль"
+    MaxWidth="600"
+    Icon="/View/Windows/Edit/LOGO.png"
     SizeToContent="WidthAndHeight"
     Style="{DynamicResource RegWindow}"
     WindowStartupLocation="CenterScreen">
@@ -24,14 +26,15 @@
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Border
+                Width="520"
                 Margin="10"
                 Padding="10"
-                Style="{StaticResource BorderForForm}">
+                Style="{DynamicResource BorderForForm}">
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,37"
                         Style="{DynamicResource FormTitle}"
-                        Text="Edit" />
+                        Text="Редактирование" />
 
                     <StackPanel x:Name="formInputs" Margin="0,0,0,37">
 
@@ -49,15 +52,35 @@
                                                     BorderThickness="0"
                                                     CornerRadius="200">
                                                     <Grid>
-                                                        <Image Name="EditImage" />
-                                                        <TextBlock
+                                                        <Image
+                                                            Name="EditImage"
+                                                            Width="130"
+                                                            Height="130"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center"
-                                                            Foreground="White"
-                                                            Style="{StaticResource LinkStyle}"
-                                                            Text="Загрузить фото"
-                                                            TextAlignment="Center"
-                                                            TextWrapping="Wrap" />
+                                                            Source="{Binding Source, Mode=TwoWay}"
+                                                            Stretch="UniformToFill">
+                                                            <Image.Clip>
+                                                                <EllipseGeometry
+                                                                    Center="65,65"
+                                                                    RadiusX="65"
+                                                                    RadiusY="65" />
+                                                            </Image.Clip>
+                                                        </Image>
+                                                        <Button Command="{Binding OnLoadImageCommand}">
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <TextBlock
+                                                                        HorizontalAlignment="Center"
+                                                                        VerticalAlignment="Center"
+                                                                        Foreground="White"
+                                                                        Style="{StaticResource LinkStyle}"
+                                                                        Text="Загрузить фото"
+                                                                        TextAlignment="Center"
+                                                                        TextWrapping="Wrap" />
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
                                                     </Grid>
                                                 </Border>
                                             </ControlTemplate>
@@ -71,55 +94,84 @@
 
                         <tb:FormInput
                             Margin="0,0,0,25"
+                            FontSize="18"
                             ImageSource="/View/Windows/Registrations/Nickname.png"
                             InputName="NameInput"
-                            InputText="Nickname" />
+                            InputText="{Binding Name, Mode=OneTime}"
+                            Size="21"
+                            Text="{Binding Name, Mode=TwoWay}" />
 
                         <tb:FormInput
                             Margin="0,0,0,25"
+                            FontSize="18"
                             ImageSource="/View/Windows/Registrations/Nickname.png"
                             InputName="NameInput"
-                            InputText="Surname" />
+                            InputText="{Binding Description, Mode=OneTime}"
+                            Size="21"
+                            Text="{Binding Description, Mode=TwoWay}" />
 
                         <tb:FormInput
                             Margin="0,0,0,25"
-                            ImageSource="/View/Windows/Registrations/Nickname.png"
-                            InputName="NameInput"
-                            InputText="Middle name" />
-
-                        <tb:FormInput
-                            Margin="0,0,0,25"
+                            FontSize="18"
                             ImageSource="/View/Windows/Registrations/Login.png"
                             InputName="NameInput"
-                            InputText="Login" />
+                            InputText="{Binding Login, Mode=OneTime}"
+                            Size="21"
+                            Text="{Binding Login, Mode=TwoWay}" />
 
                         <tb:FormInput
                             Margin="0,0,0,25"
+                            FontSize="18"
                             ImageSource="/View/Windows/Registrations/Password.png"
                             InputName="PasswordInput"
-                            InputText="Password" />
+                            InputText="{Binding Password, Mode=OneTime}"
+                            Size="21"
+                            Text="{Binding Password, Mode=TwoWay}" />
 
                         <tb:FormInput
                             Margin="0,0,0,25"
+                            FontSize="18"
                             ImageSource="/View/Windows/Registrations/Password.png"
                             InputName="PasswordInput"
-                            InputText="Repeat password" />
+                            InputText="{Binding RePass, Mode=OneTime}"
+                            Size="21"
+                            Text="{Binding RePass, Mode=TwoWay}" />
 
                     </StackPanel>
 
-                    <StackPanel>
-                        <b:RadiusButton
-                            Margin="0,0,0,8"
-                            HorizontalAlignment="Center"
-                            Content="Edit"
-                            Radius="20"
-                            From="#FFDD2981"
-                            To="#FFE600FA" />
-                    </StackPanel>
+                    <DockPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <b:RadiusButton
+                                Grid.Column="0"
+                                Margin="0,0,8,8"
+                                HorizontalAlignment="Center"
+                                Command="{Binding OnSubmitCommand}"
+                                Content="Редактировать"
+                                FontSize="23"
+                                Radius="20"
+                                From="{DynamicResource ColorThirdMain}"
+                                To="{DynamicResource ColorThirdMain}" />
+
+                            <b:RadiusButton
+                                Grid.Column="1"
+                                Margin="8,0,0,8"
+                                HorizontalAlignment="Center"
+                                Command="{Binding OnCancelCommand}"
+                                Content="Отмена"
+                                FontSize="23"
+                                Radius="20"
+                                From="{DynamicResource ColorSecond}"
+                                To="{DynamicResource ColorSecond}" />
+                        </Grid>
+
+                    </DockPanel>
 
                 </StackPanel>
             </Border>
         </ScrollViewer>
     </Grid>
-
 </Window>

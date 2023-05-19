@@ -15,7 +15,6 @@ public class Program
         //Logger.ToConsole = true;
 
         ServerSpace.Server server = null;
-
         try
         {
             server = new("127.0.0.1", 8282);
@@ -24,6 +23,7 @@ public class Program
             server.StartReceiveAsync();
             server.StartOnlineCleanerAsync();
             server.MessageControllerStartAsync();
+            server.StartResponseServerAsync();
             //server.StartCallServerAsync();
         }
         catch(Exception e)

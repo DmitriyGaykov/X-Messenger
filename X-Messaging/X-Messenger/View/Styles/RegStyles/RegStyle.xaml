@@ -9,7 +9,7 @@
 
             <Setter Property="MinWidth" Value="20" />
 
-            <Setter Property="Background" Value="#261332" />
+            <Setter Property="Background" Value="{ DynamicResource WindowColor }" />
 
         </Style.Setters>
     </Style>

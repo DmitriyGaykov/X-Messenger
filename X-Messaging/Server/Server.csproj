@@ -8,6 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\**" />
+    <Compile Remove="ServerSpace\**" />
+    <EmbeddedResource Remove="Assets\**" />
+    <EmbeddedResource Remove="ServerSpace\**" />
+    <None Remove="Assets\**" />
+    <None Remove="ServerSpace\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NAudio" Version="2.1.0" />
     <PackageReference Include="NAudio.WaveFormRenderer" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -15,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lib\Lib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Assets\Database\" />
   </ItemGroup>
 
 </Project>

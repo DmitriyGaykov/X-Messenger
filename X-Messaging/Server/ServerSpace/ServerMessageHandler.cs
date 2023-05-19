@@ -1,7 +1,10 @@
 ﻿global using System.Collections.Concurrent;
 using Lib.Converters;
 using Lib.MessageNamespace.CallMessages;
+using Lib.MessageNamespace.RequestMessages;
 using Lib.MessageNamespace.ViewMessages;
+using Server.Assets.Database;
+using Server.Assets.Database.DBObjects;
 using System.Text;
 
 namespace Server.ServerSpace;
@@ -64,6 +67,17 @@ public partial class Server
                         WorkWithCallMessageAsync((CallMessage)msg);
                     }
                     break;
+                case Message.TypeOfMessage.RequestMessage:
+                    {
+                        var rmsg = (RequestMessage)msg;
+                        switch(rmsg.RequestMessageType)
+                        {
+                            case RequestMessage.TypeOfRequestMessage.RegisterMessage:
+                                WorkWithRegistr((RegisterMessage)rmsg);
+                                break;
+                        }
+                    }
+                    break;
             }
         }
             
@@ -81,10 +95,47 @@ public partial class Server
 
         socket.SendToAsync(bytes, to);
 
+        AddOnWaiting(msg, to);
+
         logger.MicroInfo($"Контролер сообщений отправил сообщение пользователю с ID {msg.IDUserTo}");
     }
     private async void ToDBAsync(ViewMessage msg)
     {
         // Когда-нибудь реализовать
+    }
+
+    private async void WorkWithRegistr(RegisterMessage registerMessage, EndPoint to = null)
+    {
+        logger.MicroInfo($"Пришел запрос на регистрацию пользователя с именем {registerMessage.User.Name}");
+        await Task.Run(() =>
+        {
+            if (to is null)
+            {
+                onlineUsers.TryGetValue(registerMessage.IDUserFrom, out to);
+
+                if (to is null)
+                    return;
+            }
+
+            DBUser user = new(registerMessage.User);
+            bool res;
+
+            using(var db = new DB())
+            {
+                res = db.InsertObject(user);
+            }
+
+            RegisterMessage rmsg = new(user, res);
+            SendAsync(rmsg, to);
+
+            if(res)
+            {
+                logger.MicroInfo($"Регистрация успешно произошла! Пользователь { user.Name }");
+            }
+            else
+            {
+                logger.MicroWarning($"Регистрация неуспешна! Пользователь {user.Name}");
+            }
+        });
     }
 }

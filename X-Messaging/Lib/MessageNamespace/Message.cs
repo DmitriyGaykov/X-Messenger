@@ -6,12 +6,17 @@ public class Message
 {
     #region Fields
 
-    protected readonly Guid id = Guid.NewGuid();
+    protected Guid id = Guid.NewGuid();
 
     #endregion
 
     #region Props
-    public Guid Id => id;
+
+    public Guid Id
+    {
+        get => id;
+        set => id = value;
+    }
     public TypeOfMessage MessageType { get; set; }
     public int IDUserFrom { get; set; }
     public int IDUserTo { get; set; }
@@ -59,7 +64,8 @@ public class Message
         ViewMessage, // Текстовое сообщение | Голосовое сообщение
         AnswerMessage, // Ответ от сервера на успешный или неуспешный прием сообщения
         OnlineMessage, // Сообщение от клиента посылается каждые 20 секунд на сервер, чтобы указать, что он в сети
-        CallMessage // Сообщение, работающей со звонками
+        CallMessage, // Сообщение, работающей со звонками
+        RequestMessage // Сообщения для осуществления запросов
     }
 
     #endregion

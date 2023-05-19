@@ -1,0 +1,135 @@
+﻿<Window
+    x:Class="X_Messenger.View.Windows.AdminPanel.AdminPanelView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:butts="clr-namespace:X_Messenger.View.Tags.Buttons"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:X_Messenger.View.Windows.MainPage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:msg="clr-namespace:X_Messenger.Model.Messages"
+    xmlns:smsg="clr-namespace:X_Messenger.Model.Assets.Messages.StickerMessages"
+    xmlns:tb="clr-namespace:X_Messenger.View.Tags.TextBoxes"
+    xmlns:tmsg="clr-namespace:X_Messenger.Model.Assets.Messages.TextMessages"
+    xmlns:vmsg="clr-namespace:X_Messenger.Model.Assets.Messages.VoiceMessages"
+    Title="Admin Panel"
+    MinWidth="1140"
+    MinHeight="650"
+    Icon="/View/Windows/AdminPanel/LOGO.png"
+    Style="{DynamicResource WindowStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Styles/MainPage/MainPageStyle.xaml" />
+                <ResourceDictionary Source="/View/Styles/AdminPanel/AdminPanelStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="24*" MaxWidth="400" />
+            <ColumnDefinition Width="76*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Style="{DynamicResource HeaderBorderStyle}">
+            <DockPanel VerticalAlignment="Center">
+                <TextBlock Style="{DynamicResource ApplicationName}" Text="X-Messenger" />
+            </DockPanel>
+        </Border>
+
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            Style="{DynamicResource HeaderBorderStyle}">
+            <Grid>
+                <StackPanel
+                    Name="UserNameAndLastDate"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <DockPanel>
+                        <TextBlock Style="{StaticResource NameOfPersonStyle}" Text="Привет, " />
+                        <TextBlock
+                            Width="250"
+                            Style="{StaticResource NameOfPersonStyle}"
+                            Text="{Binding CurrentAdmin.Name}" />
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--  NavMenu  -->
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Style="{DynamicResource NavMenuStyle}">
+            <Grid>
+                <StackPanel Style="{StaticResource LinksWrapper}">
+                    <Button Command="{Binding ToUsersCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <DockPanel Style="{StaticResource Link}">
+                                    <Image Source="/View/Windows/AdminPanel/linkUsers.png" Style="{StaticResource LinkImage}" />
+                                    <TextBlock Style="{StaticResource LinkText}" Text="Пользователи" />
+                                </DockPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Command="{Binding ToStatisticsCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <DockPanel Style="{StaticResource Link}">
+                                    <Image Source="/View/Windows/AdminPanel/linkStatistics.png" Style="{StaticResource LinkImage}" />
+                                    <TextBlock Style="{StaticResource LinkText}" Text="Статистика" />
+                                </DockPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Command="{Binding ToStickersCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <DockPanel Style="{StaticResource Link}">
+                                    <Image Source="/View/Windows/AdminPanel/linkStickers.png" Style="{StaticResource LinkImage}" />
+                                    <TextBlock Style="{StaticResource LinkText}" Text="Стикеры" />
+                                </DockPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!--  Pages  -->
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Style="{DynamicResource BorderMessagesWrapper}">
+            <Grid>
+                <!--  Messages  -->
+                <Border
+                    Grid.Row="0"
+                    Padding="9"
+                    VerticalAlignment="Stretch"
+                    Style="{DynamicResource MessagesWrapperStyle}">
+
+                    <Frame Name="Pages" NavigationUIVisibility="Hidden" />
+
+                </Border>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

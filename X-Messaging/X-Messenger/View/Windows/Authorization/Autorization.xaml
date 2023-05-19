@@ -7,12 +7,13 @@
     xmlns:local="clr-namespace:X_Messenger.View.Windows.Registrations"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="clr-namespace:X_Messenger.View.Tags.TextBoxes"
+    xmlns:vm="clr-namespace:X_Messenger.View.Windows.Registrations"
+    
     Title="Авторизация"
     SizeToContent="WidthAndHeight"
     Style="{DynamicResource RegWindow}"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen" Icon="/View/Windows/Authorization/LOGO.png">
 
-    
 
     <Window.Resources>
         <ResourceDictionary>
@@ -24,27 +25,31 @@
     </Window.Resources>
 
     <Grid>
-        <Border Margin="50" Style="{StaticResource BorderForForm}">
+        <Border Margin="50" MaxWidth="460" Style="{StaticResource BorderForForm}">
             <StackPanel>
                 <TextBlock
                     Margin="0,0,0,57"
                     Style="{DynamicResource FormTitle}"
-                    Text="Authorization" />
+                    Text="Авторизация" />
 
 
                 <StackPanel x:Name="formInputs" Margin="0,0,0,57">
 
                     <tb:FormInput
                         Margin="0,0,0,35"
+                        FontSize="21"
                         ImageSource="/View/Windows/Registrations/Login.png"
                         InputName="NameInput"
-                        InputText="Login" />
+                        InputText="Логин"
+                        Text="{Binding Login, Mode=TwoWay}" />
 
                     <tb:FormInput
                         Margin="0,0,0,35"
+                        FontSize="21"
                         ImageSource="/View/Windows/Registrations/Password.png"
                         InputName="PasswordInput"
-                        InputText="Password" />
+                        InputText="Пароль"
+                        Text="{Binding Password, Mode=TwoWay}" />
 
                 </StackPanel>
 
@@ -52,14 +57,16 @@
                     <b:RadiusButton
                         Margin="0,0,0,8"
                         HorizontalAlignment="Center"
-                        Content="Sign in"
+                        Command="{Binding OnSubmitCommand}"
+                        Content="Войти"
                         Radius="20"
-                        From="#FFDD2981"
-                        To="#FFE600FA" />
+                        From="{ DynamicResource ColorThirdMain }"
+                        To="{DynamicResource ColorThirdMain }" />
 
                     <Button
                         Name="LinkTo"
-                        Content="Зарегистрийтесь!"
+                        Command="{Binding OnLinkCommand}"
+                        Content="Зарегистрируйтесь!"
                         Style="{StaticResource LinkButtonStyle}" />
                 </StackPanel>
 

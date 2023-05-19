@@ -1,18 +1,20 @@
 ﻿using Lib.Assets.Logging;
 using NAudio.Wave;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Lib.Converters;
 public class VoiceRecorder
 {
     #region Fields
 
-    private readonly WaveInEvent waveIn;
+    private WaveInEvent waveIn;
     private WaveFormat waveFormat;
+    private WaveOutEvent waveOut;
+    private EventHandler<StoppedEventArgs> onStopped;
 
     private int sampleRate;
     private int channels;
     private int bitDepth;
+    private readonly List<byte> buffer = new();
 
     #endregion
 
@@ -20,12 +22,13 @@ public class VoiceRecorder
 
     public VoiceRecorder(int sampleRate = 44100, int channels = 2, int bitDepth = 16)
     {
-        waveIn = new WaveInEvent();
-        waveFormat = new WaveFormat(sampleRate, channels, bitDepth);
+        waveFormat = new WaveFormat(sampleRate, bitDepth, channels);
 
         this.sampleRate = sampleRate;
         this.channels = channels;
         this.bitDepth = bitDepth;
+
+        OnStopped += WhenStoped;
     }
 
     #endregion
@@ -64,15 +67,19 @@ public class VoiceRecorder
         }
     }
 
+    public List<byte> Buffer => new(buffer);
+
+    public bool IsStoped { get; private set; } = true;
+
+    public event EventHandler<StoppedEventArgs> OnStopped 
+    { 
+        add => this.onStopped += value;
+        remove => this.onStopped -= value;
+    }
+
     #endregion
 
     #region Events
-
-    public event EventHandler<WaveInEventArgs> DataAvailable
-    {
-        add => waveIn.DataAvailable += value;
-        remove => waveIn.DataAvailable -= value;
-    }
 
     #endregion
 
@@ -80,15 +87,54 @@ public class VoiceRecorder
 
     public void StartRecord()
     {
-        waveIn.WaveFormat = waveFormat;
+        waveIn = new()
+        {
+            WaveFormat = waveFormat
+        };
+
+        waveIn.DataAvailable += RecordBytes;
+
+        buffer.Clear();
         waveIn.StartRecording();
         Logger.GetLogger().MicroInfo("Запись голоса начата");
+
+        while(waveIn.BufferMilliseconds is not > 0)
+        {
+
+        }
     }
     public void EndRecord()
     {
         waveIn.StopRecording();
         Logger.GetLogger().MicroInfo("Запись голоса окончена");
     }
+    public void StartVoicePresent(byte[] voice)
+    {
+        IsStoped = false;
+        MemoryStream stream = new(voice);
+        RawSourceWaveStream rawSourceStream = new(stream, waveFormat);
+        waveOut = new();
+        waveOut.Init(rawSourceStream);
+        waveOut.Play();
+        waveOut.PlaybackStopped += onStopped;
+    }
+
+    public void StopVoicePresent()
+    {
+        waveOut.Stop();
+        waveOut.Dispose();
+    }
+
+    private void RecordBytes(object sender, WaveInEventArgs e)
+    {
+        buffer.AddRange(e.Buffer);
+    }
+
+    private void WhenStoped(object sender, StoppedEventArgs e)
+    {
+        IsStoped = true;
+    }
+
 
     #endregion
 }

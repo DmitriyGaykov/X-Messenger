@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lib.Assets.Logging;
+
 public class Logger
 {
 	private static Logger logger = null;
@@ -12,6 +13,7 @@ public class Logger
 	private static StreamWriter file;
 	private static bool toConsole = false;
 	private static readonly object locker = new object();
+
 	private Logger(string logfile)
 	{
 		Logger.logfile = logfile;

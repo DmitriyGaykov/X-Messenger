@@ -73,12 +73,20 @@ public partial class Server
 
         if (msg is not null)
         {
-            msg = DefineMessage(msg, json.ToString());
+            msg = MessagesDefiner.DefineMessage(msg, json.ToString());
 
             semaphore.WaitOne();
 
             this.AddOnlineUserAsync(msg.IDUserFrom, clnt);
-            messages.Add(msg);
+
+            if (msg is not AnswerMessage answ)
+            {
+                messages.Add(msg);
+            }
+            else
+            {
+                answerMessages.Add(answ.Id);
+            }
 
             semaphore.Release();
         }
@@ -107,56 +115,5 @@ public partial class Server
             }
         });
     }
-
-    private static Message DefineMessage(Message msg, string json)
-    {
-        if (msg is null) return null;
-
-        Message? answer = null;
-
-        switch(msg.MessageType)
-        {
-            case Message.TypeOfMessage.ViewMessage: // Видимые сообщения
-                {
-                    var temp = MyJsonConverter.FromJson<ViewMessage>(json);
-
-                    switch (temp?.ViewMessageType)
-                    {
-                        case ViewMessage.TypeOfViewMessage.TextMessage:
-                            answer = MyJsonConverter.FromJson<TextMessage>(json);
-                            break;
-                        case ViewMessage.TypeOfViewMessage.VoiceMessage:
-                            answer = MyJsonConverter.FromJson<VoiceMessage>(json);
-                            break;
-                    }
-                }
-                break;
-            case Message.TypeOfMessage.AnswerMessage:
-                answer = MyJsonConverter.FromJson<AnswerMessage>(json);
-                break;
-            case Message.TypeOfMessage.OnlineMessage:
-                answer = MyJsonConverter.FromJson<OnlineMessage>(json);
-                break;
-            case Message.TypeOfMessage.CallMessage:
-                {
-                    var temp = MyJsonConverter.FromJson<CallMessage>(json);
-                    
-                    switch (temp.MessageCallMessageType)
-                    {
-                        case CallMessage.TypeOfCallMessage.StartCall:
-                            answer = MyJsonConverter.FromJson<StartCallMessage>(json);
-                            break;
-                        case CallMessage.TypeOfCallMessage.ByteCallMessage:
-                            answer = MyJsonConverter.FromJson<ByteCallMessage>(json);
-                            break;
-                        case CallMessage.TypeOfCallMessage.EndCallMessage:
-                            answer = MyJsonConverter.FromJson<EndCallMessage>(json);
-                            break;
-                    }
-                }
-                break;
-        }
-
-        return answer;
-    }
+   
 }

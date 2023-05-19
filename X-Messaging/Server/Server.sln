@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+# Blend for Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server.csproj", "{A2DF4D3A-CD1D-4FEB-A571-6481FCC4A669}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "..\Test\Test.csproj", "{06FCF020-EDEC-4294-AEF6-D0B2AADA7FF3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "..\Lib\Lib.csproj", "{BBF5056B-F87D-473D-89A4-491BC306E47A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test2", "..\Test2\Test2.csproj", "{E2549C8E-5E61-44DC-AD6B-89046EB6A4B7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X-Messenger", "..\X-Messenger\X-Messenger.csproj", "{BFE71883-B667-483A-85ED-B5842D926143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X-Messenger", "..\X-Messenger\X-Messenger.csproj", "{BFE71883-B667-483A-85ED-B5842D926143}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +19,10 @@ Global
 		{A2DF4D3A-CD1D-4FEB-A571-6481FCC4A669}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2DF4D3A-CD1D-4FEB-A571-6481FCC4A669}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2DF4D3A-CD1D-4FEB-A571-6481FCC4A669}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06FCF020-EDEC-4294-AEF6-D0B2AADA7FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06FCF020-EDEC-4294-AEF6-D0B2AADA7FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06FCF020-EDEC-4294-AEF6-D0B2AADA7FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06FCF020-EDEC-4294-AEF6-D0B2AADA7FF3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBF5056B-F87D-473D-89A4-491BC306E47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBF5056B-F87D-473D-89A4-491BC306E47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF5056B-F87D-473D-89A4-491BC306E47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBF5056B-F87D-473D-89A4-491BC306E47A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2549C8E-5E61-44DC-AD6B-89046EB6A4B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2549C8E-5E61-44DC-AD6B-89046EB6A4B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2549C8E-5E61-44DC-AD6B-89046EB6A4B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2549C8E-5E61-44DC-AD6B-89046EB6A4B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFE71883-B667-483A-85ED-B5842D926143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFE71883-B667-483A-85ED-B5842D926143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE71883-B667-483A-85ED-B5842D926143}.Release|Any CPU.ActiveCfg = Release|Any CPU

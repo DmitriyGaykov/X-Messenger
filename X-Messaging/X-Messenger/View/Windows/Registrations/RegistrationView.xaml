@@ -6,8 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:X_Messenger.View.Windows.Registrations"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:registrations="clr-namespace:X_Messenger.ViewModel.Windows.Registrations"
     xmlns:tb="clr-namespace:X_Messenger.View.Tags.TextBoxes"
+    xmlns:vm="[vm ]clr-namespace:X_Messenger.View.Windows.Registrations"
     Title="Регистрация"
+    MaxWidth="600"
+    Icon="/View/Windows/Registrations/LOGO.png"
     SizeToContent="WidthAndHeight"
     Style="{DynamicResource RegWindow}"
     WindowStartupLocation="CenterScreen">
@@ -20,7 +24,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
     <Grid>
 
         <Border Margin="50" Style="{StaticResource BorderForForm}">
@@ -29,48 +32,63 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,0,0,97"
+                    Margin="0,0,0,67"
                     Style="{DynamicResource FormTitle}"
-                    Text="Registration" />
+                    Text="Регистрация" />
 
 
-                <StackPanel x:Name="formInputs" Margin="0,0,0,97">
+                <StackPanel x:Name="formInputs" Margin="0,0,0,67">
 
                     <tb:FormInput
                         Margin="0,0,0,35"
+                        FontSize="21"
                         ImageSource="/View/Windows/Registrations/Nickname.png"
                         InputName="NameInput"
-                        InputText="Nickname" />
+                        InputText="{Binding Nickname, Mode=OneTime}"
+                        TabIndex="0"
+                        Text="{Binding Nickname, Mode=TwoWay}" />
 
                     <tb:FormInput
                         Margin="0,0,0,35"
+                        FontSize="21"
                         ImageSource="/View/Windows/Registrations/Login.png"
                         InputName="LoginInput"
-                        InputText="Login" />
+                        InputText="{Binding Login, Mode=OneTime}"
+                        TabIndex="1"
+                        Text="{Binding Login, Mode=TwoWay}" />
 
                     <tb:FormInput
                         Margin="0,0,0,35"
+                        FontSize="21"
                         ImageSource="/View/Windows/Registrations/Password.png"
                         InputName="PasswordInput"
-                        InputText="Password" />
+                        InputText="{Binding Password, Mode=OneTime}"
+                        TabIndex="2"
+                        Text="{Binding Password, Mode=TwoWay}" />
 
                     <tb:FormInput
+                        FontSize="21"
                         ImageSource="/View/Windows/Registrations/Password.png"
                         InputName="RepassInput"
-                        InputText="Repeat password" />
+                        InputText="{Binding RepeatPassword, Mode=OneTime}"
+                        TabIndex="3"
+                        Text="{Binding RepeatPassword, Mode=TwoWay}" />
                 </StackPanel>
 
                 <StackPanel>
                     <b:RadiusButton
                         Margin="0,0,0,8"
                         HorizontalAlignment="Center"
-                        Content="Sign up"
+                        Command="{Binding ClickOnSubmitCommand}"
+                        Content="Зарегистрироваться"
                         Radius="20"
-                        From="#FFDD2981"
-                        To="#FFE600FA" />
+                        TabIndex="4"
+                        From="{DynamicResource ColorThirdMain}"
+                        To="{DynamicResource ColorThirdMain}" />
 
                     <Button
                         Name="LinkTo"
+                        Command="{Binding OnLinkCommand}"
                         Content="Войдите на свой аккаунт!"
                         Style="{StaticResource LinkButtonStyle}" />
                 </StackPanel>

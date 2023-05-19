@@ -20,6 +20,9 @@ public partial class FormInput : TextBox
     public static readonly DependencyProperty InputNameProperty =
         DependencyProperty.Register("InputName", typeof(string), typeof(FormInput));
 
+    public static readonly DependencyProperty SizeProperty =
+        DependencyProperty.Register("Size", typeof(double), typeof(FormInput), new(30.0));
+
     public static readonly DependencyProperty MainColorProperty =
         DependencyProperty.Register("MainColor", typeof(System.Windows.Media.Brush), typeof(FormInput), new(new SolidColorBrush(Colors.White)));
 
@@ -46,6 +49,17 @@ public partial class FormInput : TextBox
     {
         get => GetValue(ImageSourceProperty) as ImageSource;
         set => SetValue(ImageSourceProperty, value);
+    }
+
+    public double Size
+    {
+        get 
+        {
+            double res;
+            var answer = double.TryParse(GetValue(SizeProperty)?.ToString(), out res);
+            return answer ? res : 0.0;
+        }
+        set => SetValue(SizeProperty, value); 
     }
 
     public System.Windows.Media.Brush MainColor

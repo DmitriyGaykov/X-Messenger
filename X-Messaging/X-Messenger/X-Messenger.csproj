@@ -9,31 +9,83 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="View\Modals\Group 31.png" />
+    <None Remove="View\Windows\AdminPanel\linkStatistics.png" />
+    <None Remove="View\Windows\AdminPanel\linkStickers.png" />
+    <None Remove="View\Windows\AdminPanel\linkUsers.png" />
+    <None Remove="View\Windows\AdminPanel\LOGO.png" />
+    <None Remove="View\Windows\AdminPanel\Pages\Delete.png" />
+    <None Remove="View\Windows\AdminPanel\Pages\DellSticker.png" />
+    <None Remove="View\Windows\AdminPanel\Pages\Search.png" />
+    <None Remove="View\Windows\Authorization\LOGO.png" />
+    <None Remove="View\Windows\Authorization\Nickname.png" />
+    <None Remove="View\Windows\Edit\LOGO.png" />
     <None Remove="View\Windows\MainPage\Angela.png" />
+    <None Remove="View\Windows\MainPage\CallPink.png" />
     <None Remove="View\Windows\MainPage\CallPurple.png" />
     <None Remove="View\Windows\MainPage\Cross.png" />
+    <None Remove="View\Windows\MainPage\Delete.png" />
+    <None Remove="View\Windows\MainPage\Edit.png" />
     <None Remove="View\Windows\MainPage\Logo.png" />
+    <None Remove="View\Windows\MainPage\Microphone.png" />
+    <None Remove="View\Windows\MainPage\Pages\Cross.png" />
+    <None Remove="View\Windows\MainPage\Pages\Оля.jpg" />
     <None Remove="View\Windows\MainPage\Pause.png" />
+    <None Remove="View\Windows\MainPage\Search.png" />
+    <None Remove="View\Windows\MainPage\Send.png" />
     <None Remove="View\Windows\MainPage\Settings.png" />
     <None Remove="View\Windows\MainPage\Smile.png" />
     <None Remove="View\Windows\MainPage\StartVoiceMessage.png" />
+    <None Remove="View\Windows\MainPage\Stickers.png" />
+    <None Remove="View\Windows\MainPage\Update.png" />
     <None Remove="View\Windows\Registrations\Login.png" />
+    <None Remove="View\Windows\Registrations\LOGO.png" />
     <None Remove="View\Windows\Registrations\Nickname.png" />
     <None Remove="View\Windows\Registrations\Password.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Modals\Group 31.png" />
+    <Resource Include="View\Windows\AdminPanel\linkStatistics.png" />
+    <Resource Include="View\Windows\AdminPanel\linkStickers.png" />
+    <Resource Include="View\Windows\AdminPanel\linkUsers.png" />
+    <Resource Include="View\Windows\AdminPanel\LOGO.png" />
+    <Resource Include="View\Windows\AdminPanel\Pages\Delete.png" />
+    <Resource Include="View\Windows\AdminPanel\Pages\DellSticker.png" />
+    <Resource Include="View\Windows\AdminPanel\Pages\Search.png" />
+    <Resource Include="View\Windows\Authorization\LOGO.png" />
+    <Resource Include="View\Windows\Authorization\Nickname.png" />
+    <Resource Include="View\Windows\Edit\LOGO.png" />
     <Resource Include="View\Windows\MainPage\Angela.png" />
+    <Resource Include="View\Windows\MainPage\CallPink.png" />
     <Resource Include="View\Windows\MainPage\CallPurple.png" />
     <Resource Include="View\Windows\MainPage\Cross.png" />
+    <Resource Include="View\Windows\MainPage\Delete.png" />
+    <Resource Include="View\Windows\MainPage\Edit.png" />
     <Resource Include="View\Windows\MainPage\Logo.png" />
+    <Resource Include="View\Windows\MainPage\Microphone.png" />
+    <Resource Include="View\Windows\MainPage\Pages\Cross.png" />
+    <Resource Include="View\Windows\MainPage\Pages\Оля.jpg" />
     <Resource Include="View\Windows\MainPage\Pause.png" />
+    <Resource Include="View\Windows\MainPage\Search.png" />
+    <Resource Include="View\Windows\MainPage\Send.png" />
     <Resource Include="View\Windows\MainPage\Settings.png" />
     <Resource Include="View\Windows\MainPage\Smile.png" />
     <Resource Include="View\Windows\MainPage\StartVoiceMessage.png" />
+    <Resource Include="View\Windows\MainPage\Stickers.png" />
+    <Resource Include="View\Windows\MainPage\Update.png" />
     <Resource Include="View\Windows\Registrations\Login.png" />
+    <Resource Include="View\Windows\Registrations\LOGO.png" />
     <Resource Include="View\Windows\Registrations\Nickname.png" />
     <Resource Include="View\Windows\Registrations\Password.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\Lib.csproj" />
   </ItemGroup>
 
 </Project>

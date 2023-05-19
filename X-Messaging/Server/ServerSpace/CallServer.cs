@@ -88,7 +88,7 @@ public partial class Server
             }
 
             msg = MyJsonConverter.FromJson<Message>(text);
-            msg = DefineMessage(msg, text);
+            msg = MessagesDefiner.DefineMessage(msg, text);
 
             if (msg is null || msg.MessageType is not Message.TypeOfMessage.CallMessage)
             {

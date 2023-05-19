@@ -2,18 +2,29 @@
     x:Class="X_Messenger.View.Windows.MainPage.MainPageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:butts="clr-namespace:X_Messenger.View.Tags.Buttons"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:X_Messenger.View.Windows.MainPage"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:msg="clr-namespace:X_Messenger.Model.Messages"
+    xmlns:smsg="clr-namespace:X_Messenger.Model.Assets.Messages.StickerMessages"
     xmlns:tb="clr-namespace:X_Messenger.View.Tags.TextBoxes"
-    Title="MainPageView"
+    xmlns:tmsg="clr-namespace:X_Messenger.Model.Assets.Messages.TextMessages"
+    xmlns:vmsg="clr-namespace:X_Messenger.Model.Assets.Messages.VoiceMessages"
     MinWidth="1140"
+    Icon="/View/Windows/MainPage/Logo.png"
     Style="{DynamicResource WindowStyle}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <Window.Resources>
-        <ResourceDictionary Source="/View/Styles/MainPage/MainPageStyle.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Styles/MainPage/MainPageStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
@@ -23,8 +34,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="27*" MaxWidth="447" />
-            <ColumnDefinition Width="73*" />
+            <ColumnDefinition Width="34*" MaxWidth="400" />
+            <ColumnDefinition Width="66*" />
         </Grid.ColumnDefinitions>
 
         <Border
@@ -33,7 +44,13 @@
             VerticalAlignment="Center"
             Style="{DynamicResource HeaderBorderStyle}">
             <DockPanel VerticalAlignment="Center">
-                <Image Source="/View/Windows/MainPage/Settings.png" Style="{StaticResource SettingImageStyle}" />
+                <Button Command="{Binding OnSettingsCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="/View/Windows/MainPage/Settings.png" Style="{StaticResource SettingImageStyle}" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <TextBlock Style="{DynamicResource ApplicationName}" Text="X-Messenger" />
             </DockPanel>
         </Border>
@@ -47,148 +64,571 @@
                     Name="UserNameAndLastDate"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                    <TextBlock
-                        x:Name="UserName"
-                        Style="{DynamicResource UserNameStyle}"
-                        Text="Angela" />
+                    <Button Command="{Binding ShowProfileCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <TextBlock
+                                    x:Name="UserName"
+                                    Style="{DynamicResource UserNameStyle}"
+                                    Text="{Binding CurrentUserName}" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <TextBlock
                         x:Name="LastDate"
                         Style="{DynamicResource DateStyle}"
-                        Text="was online at 18:18" />
+                        Text="{Binding LastVisit}" />
                 </StackPanel>
 
-                <Image
-                    Name="Logo"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Source="/View/Windows/MainPage/Logo.png"
-                    Style="{StaticResource LogoStyle}" />
+                <Button Command="{Binding OnUpdateCommand}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image
+                                Name="Call"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Source="/View/Windows/MainPage/Update.png"
+                                Style="{StaticResource LogoStyle}" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
         </Border>
 
+        <!--  PeopleWrapper  -->
         <Border
             Grid.Row="1"
             Grid.Column="0"
             Style="{DynamicResource PeopleWrapperStyle}">
-            <StackPanel>
-                <Border Style="{DynamicResource MessageBoxStyle}">
-                    <DockPanel>
-                        <DockPanel HorizontalAlignment="Center">
-                            <Image Source="/View/Windows/MainPage/Angela.png" Style="{StaticResource PersonImage}">
-                                <Image.Clip>
-                                    <EllipseGeometry
-                                        Center="50,50"
-                                        RadiusX="50"
-                                        RadiusY="50" />
-                                </Image.Clip>
-                            </Image>
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock Style="{StaticResource NameOfPersonStyle}" Text="Angela" />
-                                <TextBlock Style="{StaticResource LastMessageStyle}" Text="Hello world..." />
-                            </StackPanel>
-                        </DockPanel>
+            <Grid>
+                <ListView
+                    HorizontalAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding PeopleList}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
 
-                        <Grid HorizontalAlignment="Right">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Image
-                                Grid.Row="0"
-                                Source="/View/Windows/MainPage/Cross.png"
-                                Style="{StaticResource CrossStyle}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Style="{StaticResource LastDateStyle}"
-                                Text="12:04" />
-                        </Grid>
-                    </DockPanel>
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <ScrollViewer>
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ListView.Template>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Name="Border">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="BorderThickness" Value="0" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+                    <ListView.Resources>
+                        <DataTemplate DataType="{x:Type msg:LeftUser}">
+                            <Button
+                                Uid="{Binding Id}"
+                                HorizontalAlignment="Stretch"
+                                Click="ClickOnPerson">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border
+                                            Uid="{Binding Id}"
+                                            HorizontalAlignment="Stretch"
+                                            Style="{DynamicResource MessageBoxStyle}">
+
+                                            <DockPanel>
+                                                <DockPanel HorizontalAlignment="Center">
+                                                    <Image Source="{Binding ImageSource}" Style="{StaticResource PersonImage}">
+                                                        <Image.Clip>
+                                                            <EllipseGeometry
+                                                                Center="50,50"
+                                                                RadiusX="50"
+                                                                RadiusY="50" />
+                                                        </Image.Clip>
+                                                    </Image>
+                                                    <StackPanel VerticalAlignment="Center">
+                                                        <TextBlock
+                                                            MaxWidth="150"
+                                                            Style="{StaticResource NameOfPersonStyle}"
+                                                            Text="{Binding Name}"
+                                                            TextWrapping="Wrap" />
+                                                        <TextBlock Style="{StaticResource LastMessageStyle}" Text="{Binding LastMessage}" />
+                                                    </StackPanel>
+                                                </DockPanel>
+
+                                                <Grid Margin="20,0,0,0" HorizontalAlignment="Right">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition />
+                                                    </Grid.RowDefinitions>
+                                                    <Button Command="{Binding DataContext.DeleteChatCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                                        <Button.Template>
+                                                            <ControlTemplate>
+                                                                <Image
+                                                                    Grid.Row="0"
+                                                                    Source="/View/Windows/MainPage/Cross.png"
+                                                                    Style="{StaticResource CrossPLStyle}" />
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+
+                                                    <TextBlock
+                                                        Grid.Row="1"
+                                                        Style="{StaticResource LastDateStyle}"
+                                                        Text="{Binding TimeOfLastMessage}" />
+                                                </Grid>
+                                            </DockPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </ListView.Resources>
+
+                </ListView>
+
+                <Border Style="{DynamicResource SearchBarStyle}">
+                    <tb:FormInput
+                        FontSize="17"
+                        ImageSource="/View/Windows/MainPage/Search.png"
+                        InputText="Search"
+                        Size="20"
+                        Text="{Binding SearchText, Mode=TwoWay}" />
                 </Border>
-            </StackPanel>
+            </Grid>
         </Border>
-        <Border Grid.Row="1" Grid.Column="1">
+
+        <Frame
+            Name="Settings"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Style="{DynamicResource PageStyle}" />
+
+        <!--  MessagesWrapper  -->
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Style="{DynamicResource BorderMessagesWrapper}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!--<Border Grid.Row="0" Style="{DynamicResource MessagesWrapperStyle}">
-                    <ListBox>
-                        <ListBox.Resources>
-                            <DataTemplate DataType="{x:Type local:MyMessage}">
-                                <Border Style="{DynamicResource MyTextMessage}">
-                                    <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="Мое первое сообщение" />
-                                </Border>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type local:FriendMessage}">
-                                <Border Style="{StaticResource FriendBorderMessageStyle}">
-                                    <DockPanel>
-                                        <Image Source="/View/Windows/MainPage/Angela.png" Style="{StaticResource FriendUserImage}" />
-                                        <Border Style="{DynamicResource TextMessageFriend_Border}">
-                                            <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="Мое первое сообщение" />
-                                        </Border>
-                                    </DockPanel>
-                                </Border>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type local:MyVoiceMessage}">
-                                <Border Style="{DynamicResource MyTextMessage}">
-                                    <DockPanel>
-                                        <Image
-                                            Cursor="Hand"
-                                            MouseDown="Image_MouseDown"
-                                            Source="/View/Windows/MainPage/StartVoiceMessage.png"
-                                            Style="{StaticResource StartVoiceMessageImageStyle}" />
-                                        <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="Голосовое сообщение" />
-                                    </DockPanel>
-                                </Border>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type local:FriendVoiceMessage}">
-                                <Border Style="{ StaticResource FriendBorderMessageStyle }">
-                                    <DockPanel>
-                                        <Image Source="/View/Windows/MainPage/Angela.png" Style="{ StaticResource FriendUserImage }" />
+                <!--  Messages  -->
+                <Border
+                    Grid.Row="0"
+                    VerticalAlignment="Bottom"
+                    Style="{DynamicResource MessagesWrapperStyle}">
+                    <ListBox
+                        Name="Messages"
+                        ItemsSource="{Binding MessagesList}"
+                        Style="{StaticResource MessageListStyle}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Margin" Value="0,4" />
+                                <Setter Property="VerticalContentAlignment" Value="Bottom" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border x:Name="Border">
+                                                <ContentPresenter VerticalAlignment="Bottom" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
 
-                                        <Border Style="{ DynamicResource TextMessageFriend_Border }">
-                                            <DockPanel>
-                                                <Image MouseDown="Image_MouseDown" Source="/View/Windows/MainPage/StartVoiceMessage.png"  Style="{ StaticResource StartVoiceMessageImageStyle }" />
-                                                <TextBlock Style="{ StaticResource Message_TextBlockStyle }" Text="Голосовое сообщение" />
-                                            </DockPanel>
-                                        </Border>
-                                    </DockPanel>
-                                </Border>
+                        <ListBox.Resources>
+
+                            <DataTemplate DataType="{x:Type tmsg:MyTextMessage}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Command="{Binding DataContext.OnMessageCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border Grid.Column="0" Style="{DynamicResource MyTextMessage}">
+                                                    <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="{Binding Text}" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Border HorizontalAlignment="Right" Style="{StaticResource BorderForButtons}">
+                                        <DockPanel>
+                                            <Button Command="{Binding DataContext.EditMsgCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <Image Source="/View/Windows/MainPage/Edit.png" Style="{StaticResource ButtonEditOrDelete}" />
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                            <Button Command="{Binding DataContext.DelMsgCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <Image Source="/View/Windows/MainPage/Delete.png" Style="{StaticResource ButtonEditOrDelete}" />
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
                             </DataTemplate>
-                            <DataTemplate DataType="{x:Type local:MyStickerMessage}">
-                                <Border Style="{StaticResource MyStickerMessage}">
-                                    <Image Source="/View/Windows/MainPage/Smile.png" Style="{StaticResource StickerMessage_Image}" />
-                                </Border>
+                            <DataTemplate DataType="{x:Type tmsg:FriendTextMessage}">
+                                <Grid>
+                                    <Border Grid.Column="0" Style="{StaticResource FriendBorderMessageStyle}">
+                                        <DockPanel>
+                                            <Image Source="{Binding Image}" Style="{StaticResource FriendUserImage}" />
+                                            <Border Style="{DynamicResource TextMessageFriend_Border}">
+                                                <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="{Binding Text}" />
+                                            </Border>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
                             </DataTemplate>
-                            <DataTemplate DataType="{x:Type local:FriendStickerMessage}">
-                                <Border Style="{StaticResource FriendStickerMessage}">
-                                    <Image Source="/View/Windows/MainPage/Smile.png" Style="{StaticResource StickerMessage_Image}" />
-                                </Border>
+                            <DataTemplate DataType="{x:Type vmsg:MyVoiceMessage}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Command="{Binding DataContext.OnMessageCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border Grid.Column="0" Style="{DynamicResource MyTextMessage}">
+                                                    <DockPanel>
+                                                        <Image
+                                                            Uid="{Binding IdMessage}"
+                                                            Cursor="Hand"
+                                                            MouseDown="Image_MouseDown"
+                                                            Source="/View/Windows/MainPage/StartVoiceMessage.png"
+                                                            Style="{StaticResource StartVoiceMessageImageStyle}" />
+                                                        <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="Голосовое сообщение" />
+                                                    </DockPanel>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Border HorizontalAlignment="Right" Style="{DynamicResource BorderForButtons}">
+                                        <DockPanel>
+                                            <Button Command="{Binding DataContext.DelMsgCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <Image Source="/View/Windows/MainPage/Delete.png" Style="{StaticResource ButtonEditOrDelete}" />
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type vmsg:FriendVoiceMessage}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Style="{StaticResource FriendBorderMessageStyle}">
+                                        <DockPanel>
+                                            <Image Source="{Binding Image}" Style="{StaticResource FriendUserImage}" />
+
+                                            <Border Style="{DynamicResource TextMessageFriend_Border}">
+                                                <DockPanel>
+                                                    <Image
+                                                        Uid="{Binding IdMessage}"
+                                                        MouseDown="Image_MouseDown"
+                                                        Source="/View/Windows/MainPage/StartVoiceMessage.png"
+                                                        Style="{StaticResource StartVoiceMessageImageStyle}" />
+                                                    <TextBlock Style="{StaticResource Message_TextBlockStyle}" Text="Голосовое сообщение" />
+                                                </DockPanel>
+                                            </Border>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type smsg:MyStickerMessage}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Command="{Binding DataContext.OnMessageCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border Grid.Column="0" Style="{StaticResource MyStickerMessage}">
+                                                    <Image Source="{Binding Source}" Style="{StaticResource StickerMessage_Image}" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Border HorizontalAlignment="Right" Style="{DynamicResource BorderForButtons}">
+                                        <DockPanel>
+                                            <Button Command="{Binding DataContext.DelMsgCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <Image Source="/View/Windows/MainPage/Delete.png" Style="{StaticResource ButtonEditOrDelete}" />
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </DockPanel>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type smsg:FriendStickerMessage}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Style="{StaticResource FriendStickerMessage}">
+                                        <Image Source="{Binding Source}" Style="{StaticResource StickerMessage_Image}" />
+                                    </Border>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.Resources>
+
                     </ListBox>
-                </Border>-->
+                </Border>
+
+                <!--  Stickers  -->
+                <Grid
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Panel.ZIndex="100">
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ShowStickersMenu}" Value="False">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ShowStickersMenu}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                            Height="*"
+                            MinHeight="350"
+                            MaxHeight="400" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*"
+                            MinWidth="480"
+                            MaxWidth="548" />
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Panel.ZIndex="100"
+                        Style="{DynamicResource StickerWrapperStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="350" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Height="35"
+                                    Margin="4,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Style="{StaticResource StickerTextBlockStyle}"
+                                        Text="Stickers" />
+                                    <Image
+                                        x:Name="StickerCross"
+                                        Grid.Row="0"
+                                        Source="/View/Windows/MainPage/Cross.png"
+                                        Style="{StaticResource StickerWrapperCrossStyle}" />
+                                </Grid>
+
+                                <ListBox
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    ItemsSource="{Binding Stickers}"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ScrollViewer>
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border
+                                                            x:Name="Border"
+                                                            Margin="9"
+                                                            Cursor="Hand">
+                                                            <ContentPresenter VerticalAlignment="Center" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="BorderThickness" Value="0" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Height="{Binding Height}" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.Resources>
+                                        <DataTemplate DataType="{x:Type msg:Sticker}">
+                                            <Button Command="{Binding DataContext.OnStickerImageCommand, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" CommandParameter="{Binding}">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <Image Source="{Binding Source}" Style="{StaticResource StickerImageStyle}" />
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ListBox.Resources>
+                                </ListBox>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
 
                 <Border Style="{DynamicResource TextInput_Border}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60*" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <tb:TextInput
                             Grid.Column="0"
                             Placeholder="Enter message..."
-                            Style="{StaticResource TextInput_TextInput}" />
-                        <DockPanel Grid.Column="1" />
+                            Style="{StaticResource TextInput_TextInput}"
+                            Text="{Binding SendedMessage, Mode=TwoWay}" />
+                        <DockPanel Grid.Column="1" HorizontalAlignment="Left">
+                            <Button Command="{Binding SendMessageCommand}" Style="{StaticResource TextInput_Buttons}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Image
+                                            Width="{Binding Width}"
+                                            Height="{Binding Height}"
+                                            Source="/View/Windows/MainPage/Send.png" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button
+                                Name="StickerButton"
+                                Height="28"
+                                Style="{StaticResource TextInput_Buttons}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Image
+                                            Width="{Binding Width}"
+                                            Height="{Binding Height}"
+                                            Source="/View/Windows/MainPage/Stickers.png" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Command="{Binding VoiceMessageCommand}" Style="{StaticResource TextInput_Buttons}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            Width="{Binding Width}"
+                                            Height="{Binding Height}"
+                                            CornerRadius="200">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding VoiceStarted}" Value="False">
+                                                            <Setter Property="Background" Value="Transparent" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding VoiceStarted}" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource ThirdMainColor}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Image
+                                                Width="{Binding Width}"
+                                                Height="{Binding Height}"
+                                                Source="/View/Windows/MainPage/Microphone.png" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DockPanel>
                     </Grid>
                 </Border>
-                <Image
+
+                <!--<butts:RadiusButton
+                    x:Name="AddtoFriendButton"
                     Grid.Row="0"
-                    Source="/View/Windows/MainPage/CallPurple.png"
-                    Style="{StaticResource CallImageStyle}" />
+                    Margin="18"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Content="Add to friend!"
+                    Radius="25"
+                    From="#D3139D"
+                    To="#D3139D" />-->
             </Grid>
         </Border>
+
+        <Frame
+            Name="ProfilePage"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Style="{StaticResource ProfilePageStyle}" />
     </Grid>
 </Window>

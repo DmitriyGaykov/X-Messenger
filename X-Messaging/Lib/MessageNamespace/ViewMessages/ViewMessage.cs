@@ -10,6 +10,8 @@ public class ViewMessage : Message
 {
     public TypeOfViewMessage ViewMessageType { get; private init; }
 
+    public byte Buffer { get; set; }
+
     public ViewMessage(TypeOfViewMessage type) : base(Message.TypeOfMessage.ViewMessage)
     {
         this.ViewMessageType = type;
@@ -18,6 +20,7 @@ public class ViewMessage : Message
     public enum TypeOfViewMessage
     {
         TextMessage,
-        VoiceMessage
+        VoiceMessage,
+        StickerMessage
     }
 }

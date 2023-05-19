@@ -7,12 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NAudio" Version="2.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Remove="MessageNamespace\**" />
+    <EmbeddedResource Remove="MessageNamespace\**" />
+    <None Remove="MessageNamespace\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MessageNamespace\RequestMessages\" />
+    <Compile Remove="Converters\MessagesDefiner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Patterns\bxro3x4q.elm~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>

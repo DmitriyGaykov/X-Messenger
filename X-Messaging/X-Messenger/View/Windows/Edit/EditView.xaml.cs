@@ -13,18 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using X_Messenger.ViewModel.Windows.Edit;
 
-namespace X_Messenger.View.Windows.Edit;
-
-/// <summary>
-/// Логика взаимодействия для EditView.xaml
-/// </summary>
-public partial class EditView : Window
+namespace X_Messenger.View.Windows.Edit
 {
-    private readonly EditViewModel edit = new();
-    public EditView()
+    /// <summary>
+    /// Логика взаимодействия для EditView.xaml
+    /// </summary>
+    /// 
+    public partial class EditView : Window
     {
-        InitializeComponent();
+        private readonly EditViewModel edit;
 
-        this.DataContext = edit;
+        public EditView()
+        {
+            InitializeComponent();
+
+            edit = new();
+            this.DataContext = edit;
+        }
     }
 }

@@ -27,8 +27,6 @@ namespace X_Messenger.View.Windows.Authorization
             InitializeComponent();
 
             this.DataContext = auth;
-
-            LinkTo.Click += auth?.ClickOnLinkEvent;
         }
     }
 }

@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="X_Messenger.Model.Assets.Converters.ImageConverter" Collapsed="true">
+    <Position X="25.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAIAAABAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Converters\ImageConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.StickerMessages.FriendStickerMessage" Collapsed="true">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\StickerMessages\FriendStickerMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.StickerMessages.MyStickerMessage" Collapsed="true">
+    <Position X="9.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\StickerMessages\MyStickerMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.StickerMessages.StickerMessage">
+    <Position X="8.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\StickerMessages\StickerMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.TextMessages.FriendTextMessage" Collapsed="true">
+    <Position X="11" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\TextMessages\FriendTextMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.TextMessages.MyTextMessage" Collapsed="true">
+    <Position X="15.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\TextMessages\MyTextMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.TextMessages.TextMessage">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\TextMessages\TextMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.VoiceMessages.FriendVoiceMessage" Collapsed="true">
+    <Position X="1.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\VoiceMessages\FriendVoiceMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.VoiceMessages.MyVoiceMessage" Collapsed="true">
+    <Position X="4.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\Messages\VoiceMessages\MyVoiceMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.VoiceMessages.VoiceMessage">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Model\Assets\Messages\VoiceMessages\VoiceMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.Messages.Message">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="X_Messenger.Model.Assets.Messages.Message.TypeOfMessage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Assets\Messages\Message.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAEgAAAAAAAAAAAAAAAABAFAAAAEAAAQAA=</HashCode>
+      <FileName>Model\Assets\Messages\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Assets.MyExtentions" Collapsed="true">
+    <Position X="22" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Assets\MyExtentions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Database.DBObjects.DBLeftUser" Collapsed="true">
+    <Position X="19.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAIAAAEAAAQAAAAAAAAAAAAABAAAAQAAAAA=</HashCode>
+      <FileName>Model\Database\DBObjects\DBLeftUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="X_Messenger.Model.Database.DBObjects.DBMessage">
+    <Position X="16" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAIAAAEAAAQAAAAAAAAAAAAABAAAARAAAAA=</HashCode>
+      <FileName>Model\Database\DBObjects\DBMessage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="X_Messenger.Model.Database.DBObjects.DBStatistics" Collapsed="true">
+    <Position X="11" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAIAAAEAAAQAAAAAAAAAAAAABAAAAQAAAAA=</HashCode>
+      <FileName>Model\Database\DBObjects\DBStatistics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="X_Messenger.Model.Database.DBObjects.DBSticker" Collapsed="true">
+    <Position X="7.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAIAAAEAAAQAAAAAAAAAAAAABAAAAQAAAAA=</HashCode>
+      <FileName>Model\Database\DBObjects\DBSticker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="X_Messenger.Model.Database.DBObjects.DBUser" Collapsed="true">
+    <Position X="17.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAIAAAEAAAQAAAAAAAAAAAAABAAAAQAAAAA=</HashCode>
+      <FileName>Model\Database\DBObjects\DBUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="X_Messenger.Model.Database.DB" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAACAwIAAAIAIBAEJQAAJAAAAQABAAAAAAAAA=</HashCode>
+      <FileName>Model\Database\DB.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.Model.Messages.LeftUser" Collapsed="true">
+    <Position X="19.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAQAAAAAEAAAAAAAAQAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Model\Messages\LeftUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Messages.Sticker">
+    <Position X="7.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Messages\Sticker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Net.Client" Collapsed="true">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAGAAMAAYAAAQDgAQiAAAECAACAAAhCIEAQBABAQAA=</HashCode>
+      <FileName>Model\Net\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Net.Settings" Collapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAAAEAAAAJAAAACAgAAAAAAAAAAAhAAAAAIAA=</HashCode>
+      <FileName>Model\Net\Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Objects.Statistics">
+    <Position X="11" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAgAAAAAAAAAABAEAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Model\Objects\Statistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.Model.Objects.User">
+    <Position X="18.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAEgAgABAEgAAAAAQAMAAEAKASAAAQAgAAUgA=</HashCode>
+      <FileName>Model\Objects\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="X_Messenger.View.Assets.Commands.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Assets\Commands\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Modals.MessageBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAQAAAAAAAAAAAAAEAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Modals\MessageBox.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Tags.Buttons.RadiusButton" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAIAAAAAAAAAAAAAAAAAAAAAEAJAAAAAAAACABAAAA=</HashCode>
+      <FileName>View\Tags\Buttons\RadiusButton.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Tags.TextBoxes.FormInput" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAQgACDAEMAgAAIAgAAAAQAAAAEBAAAAAA=</HashCode>
+      <FileName>View\Tags\TextBoxes\FormInput.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Tags.TextBoxes.TextInput" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAABAAAgAAAAAgAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>View\Tags\TextBoxes\TextInput.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.AdminPanel.Pages.Statistics" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\AdminPanel\Pages\Statistics.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.AdminPanel.Pages.Stickers" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\AdminPanel\Pages\Stickers.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.AdminPanel.Pages.Users" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\AdminPanel\Pages\Users.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.AdminPanel.AdminPanelView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\AdminPanel\AdminPanelView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.Authorization.Autorization" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\Authorization\Autorization.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.Edit.EditView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>View\Windows\Edit\EditView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.MainPage.Pages.Profile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\MainPage\Pages\Profile.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.MainPage.Pages.SettingsPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\MainPage\Pages\SettingsPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.MainPage.MainPageView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Windows\MainPage\MainPageView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.View.Windows.Registrations.RegistrationView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>View\Windows\Registrations\RegistrationView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.ViewModel.Windows.AdminPanel.AdminPanelViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oBAEICAQAAAAgAAAMAAIAGQE0BGEADAABAEQCAQYFgI=</HashCode>
+      <FileName>ViewModel\Windows\AdminPanel\AdminPanelViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.ViewModel.Windows.Authorisation.AuthorizationViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAEBAACAAIAEAEAAAgAAAAAACAQAQBgAAEAA=</HashCode>
+      <FileName>ViewModel\Windows\Authorization\AuthorizationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.ViewModel.Windows.Edit.EditViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAEACAAIoIgACIAIAAgAAQEgAAEAAACAAAQAgAAEEA=</HashCode>
+      <FileName>ViewModel\Windows\Edit\EditViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.ViewModel.Windows.MainWindow.MainWindowViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AcDAgEQkALAgwIhQoCSIAaaAnBGUMTeCDIO0IZWMEzs=</HashCode>
+      <FileName>ViewModel\Windows\MainWindow\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.ViewModel.Windows.Registrations.RegistrationViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAEAAAAGBEIAEAEAAAgAAAAAACCQAQBAAAEUA=</HashCode>
+      <FileName>ViewModel\Windows\Registrations\RegistrationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="X_Messenger.App" Collapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="10" />
+</ClassDiagram>
